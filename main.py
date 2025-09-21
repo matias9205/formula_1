@@ -12,50 +12,32 @@ years = sys.argv[1:]
 if __name__ == "__main__":
     extract = Extract(years)
     formula_1_data = {}
-    "---------------sessions---------------"
+    print("-----------------------------------------sessions-----------------------------------------")
     sessions = extract.extract_data("/sessions?year={}")
     print(sessions.info())
     print("")
     print("")
     print("")
-    print("---------------meetings---------------")
+    print("-----------------------------------------meetings-----------------------------------------")
     meetings = extract.extract_data("/meetings?year={}")
     print(meetings.info())
     print("")
     print("")
     print("")
-    print("---------------drivers---------------")
+    print("-----------------------------------------drivers-----------------------------------------")
     drivers = extract.extract_data("/drivers?session_key={}", sessions)
-    formula_1_data["drivers"] = drivers
     print(drivers.info())
     print("")
     print("")
     print("")
-    print("---------------cars data---------------")
-    speed = 5
+    print("-----------------------------------------cars data-----------------------------------------")
     cars_data = extract.extract_data("/car_data?driver_number={}&session_key={}&speed>=315", drivers)
-    formula_1_data["cars_data"] = cars_data
     print(cars_data.info())
     print("")
     print("")
     print("")
-    # df_unified_1 = sessions.merge(
-    #         meetings,
-    #         on="meeting_key",
-    #         how="left",
-    #         # suffixes=("_session", "_meeting")
-    #     ).merge(
-    #         drivers,
-    #         on=["meeting_key", "session_key"],
-    #         how="left"
-    #     )
-    # print({"DF UNIFIED 1 COLUMNS": df_unified_1.columns})
-    # print(df_unified_1.info())
-    # print("")
-    # print("")
-    print("---------------laps---------------")
+    print("-----------------------------------------laps-----------------------------------------")
     laps = extract.extract_data("/laps?session_key={}&driver_number={}", drivers)
-    formula_1_data["laps"] = laps
     print(laps.info())
     print(laps.head())
     for year in years:
