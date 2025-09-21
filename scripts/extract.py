@@ -8,7 +8,8 @@ import fastf1
 class Extract:
     def __init__(self, years: list):
         self.API_URL = "https://api.openf1.org/v1"
-        self.BASE_DIR = "C:\\Users\\PC\\Documents\\Matias\\data_projects\\formula_1"
+        # self.BASE_DIR = "C:\\Users\\PC\\Documents\\Matias\\data_projects\\formula_1"
+        self.BASE_DIR = os.getcwd()
         self.YEARS = years
         print({"YEARS": self.YEARS})
 
@@ -115,6 +116,7 @@ class Extract:
             return df_data
             
     def save_raw_data(self, dict_: dict):
+        print("BASE DIR --> ", self.BASE_DIR)
         output_dir = os.path.join(self.BASE_DIR, "data", "raw")
         os.makedirs(output_dir, exist_ok=True)
         for key, value in dict_.items():
